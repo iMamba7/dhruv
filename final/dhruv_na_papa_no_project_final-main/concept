@@ -1,0 +1,5 @@
+we are going to have 3 tables
+product:company name
+money:company name
+product : date,no.,name,box,darjan (box*6),total items(darjan * 12),vajan,total vajan(total item * vanaj)
+money : date,no.,name,box,darjan (box*6),total item(darjan * 12),paisa,total paisa (if total item is there then total item* paisa else darjan * paisa)

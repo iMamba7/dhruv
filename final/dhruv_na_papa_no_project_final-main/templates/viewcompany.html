@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table with Flask</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #e0f7f7; /* Light pastel background */
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        h1 {
+            color: #004d40; /* Dark Teal */
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        table {
+            width: 60%; /* Center the table and keep it smaller */
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #004d40; /* Dark Teal for the headers */
+            color: white;
+            text-transform: uppercase;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1; /* Light hover effect */
+        }
+
+        button {
+            background: none;
+            border: none;
+            color: #00796b; /* Teal color */
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        button:hover {
+            color: #004d40; /* Darker teal on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            table {
+                width: 90%; /* Smaller screens will have a more compact table */
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Click on a row to see the data in the console</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <form action="{{ url_for('viewcompany') }}" method="POST">
+                    <input type="hidden" name="id" value="{{ row.id }}">
+                    <input type="hidden" name="name" value="{{ row.name }}">
+                    <td><button type="submit">{{ row.id }}</button></td>
+                    <td><button type="submit">{{ row.name }}</button></td>
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
