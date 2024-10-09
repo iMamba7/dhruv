@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #e0f7f7; /* Light pastel background */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .welcome-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5em;
+            color: #004d40; /* Slightly darker teal for emphasis */
+            font-weight: bold;
+            z-index: 1000; /* Ensure it's above other elements */
+        }
+
+        .container {
+            text-align: center;
+            padding: 150px 20px; /* Spacing for the welcome message */
+        }
+
+        h1 {
+            color: #004d40; /* Dark Teal */
+            font-size: 3.5em;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            width: 250px; /* Fixed width for consistency */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            font-size: 1.5em;
+            margin: 20px;
+            color: #00796b; /* Teal */
+        }
+
+        button {
+            background-color: #00796b; /* Teal */
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 20px; /* Rounded but not fully circular */
+            cursor: pointer;
+            font-size: 18px;
+            margin: 10px;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.15);
+            width: 90%; /* Full width */
+        }
+
+        button:hover {
+            background-color: #004d40; /* Darker teal */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .welcome-message {
+                font-size: 2em;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            .card {
+                width: 100%; /* Full width on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-message">WELCOME!</div>
+    <div class="container">
+        <h1>Welcome!</h1>
+        <div class="button-container">
+            <div class="card">
+                <h2>View Data</h2>
+                <button onclick="window.location.href='/viewcompany'">Go</button>
+            </div>
+            <div class="card">
+                <h2>Add Data</h2>
+                <button onclick="window.location.href='/company'">Go</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
