@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Company Data</title>
+    <script>
+        function printPage() {
+            window.print();
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #e0f7f7; /* Light pastel background */
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            color: #004d40; /* Dark Teal */
+            font-size: 3.5em;
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        div {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            color: #555;
+        }
+
+        .no-print {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        label {
+            font-weight: bold;
+            color: #004d40;
+        }
+
+        select, input[type="date"], input[type="submit"] {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1.2em;
+        }
+
+        input[type="submit"] {
+            background-color: #00796b; /* Teal */
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: none;
+            border-radius: 8px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #004d40; /* Darker teal */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #004d40; /* Dark Teal */
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Print styles */
+        @media print {
+            .no-print {
+                display: none;
+            }
+
+            table {
+                page-break-inside: auto;
+            }
+
+            th, td {
+                border: 1px solid #000;
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #00796b; /* Teal */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 10px;
+            transition: transform 0.3s, background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.15);
+        }
+
+        button:hover {
+            background-color: #004d40; /* Darker teal */
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            form {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Data for {{ company }}</h1>  <!-- Display selected company -->
+
+    <div>
+        {{ filtertitle[0] if filtertitle is not none and filtertitle != '' and filtertitle|length > 0 else "" }}
+    </div>
+
+    <!-- Add a search field to filter data -->
+    <form method="post" class='no-print'>
+        <label for="dropdown">Filter by:</label>
+        <select name="dropdown">
+            <option value="paisa">paisa</option>
+            <option value="weight">weight</option>
+            <!-- Add more options as needed -->
+        </select>
+
+        <!-- Search input field -->
+        <label for="filterDateFrom">From:</label>
+        <input type="date" id="filterDateFrom" name="filterDateFrom">
+        <label for="filterDateTo">To:</label>
+        <input type="date" id="filterDateTo" name="filterDateTo">
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <table>
+        <tr>
+            {% for header in headers %}
+                <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in data %}
+        <!-- Search will filter rows that contain the search term in any of the relevant fields -->
+        <tr>
+            <td>{{ row['Date'] }}</td>
+            <td>{{ row['Name'] }}</td>
+            <td>{{ row['Box'] }}</td>
+            <td>{{ row['Dozen'] }}</td>
+            <td>{{ row['Total Items'] if row['Total Items'] is not none else '' }}</td>
+            <td>{{ row['Weight'] if row['Weight'] is not none else '' }}</td>
+            <td>{{ row['Total Weight'] if row['Total Weight'] is not none else '' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% if not data %}
+        <p>No data available for the selected option.</p>  <!-- Notify when no data -->
+    {% endif %}
+
+    <!-- Add the Print button and apply no-print class -->
+    <button class="no-print" onclick="printPage()">Print</button>
+    <button class="no-print" onclick="window.location.href='/'">Go Back</button>
+</body>
+</html>
